@@ -418,7 +418,7 @@ Please [open an issue](https://github.com/harshmriduhash/amplifyai/issues) with 
 
 ### 💡 Feature Requests
 
-We'd love to hear your ideas! [Submit a feature request](https://github.com/harshmriduhash/amplifyai/discussions).
+We'd love to hear your ideas! [Submit a feature request](https://github.com/harshmriduhash/adwola/discussions).
 
 <div align="center">
 
