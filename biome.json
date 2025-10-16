@@ -184,7 +184,12 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.config.{js,ts}", "**/*.config.*.{js,ts}", "next.config.*", "tailwind.config.*"],
+      "includes": [
+        "**/*.config.{js,ts}",
+        "**/*.config.*.{js,ts}",
+        "next.config.*",
+        "tailwind.config.*"
+      ],
       "linter": {
         "rules": {
           "style": {
@@ -197,7 +202,11 @@
       }
     },
     {
-      "includes": ["**/*.test.{js,ts,jsx,tsx}", "**/*.spec.{js,ts,jsx,tsx}", "**/tests/**/*"],
+      "includes": [
+        "**/*.test.{js,ts,jsx,tsx}",
+        "**/*.spec.{js,ts,jsx,tsx}",
+        "**/tests/**/*"
+      ],
       "linter": {
         "rules": {
           "suspicious": {
