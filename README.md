@@ -267,7 +267,7 @@ Adwola revolutionizes content creation by solving the three biggest challenges i
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/harshmriduhash/amplifyai
+git clone https://github.com/harshmriduhash/adwola
 cd amplifyai
 pnpm install
 ```
