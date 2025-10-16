@@ -414,7 +414,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🐛 Found a Bug?
 
-Please [open an issue](https://github.com/harshmriduhash/amplifyai/issues) with detailed reproduction steps.
+Please [open an issue](https://github.com/harshmriduhash/adwola/issues) with detailed reproduction steps.
 
 ### 💡 Feature Requests
 
