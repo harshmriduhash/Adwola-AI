@@ -1,0 +1,138 @@
+{
+	"timestamp": "2025-06-28T04:56:19.726Z",
+	"score": 75,
+	"results": {
+		"dashboardLoad": [
+			{
+				"briefs": 5,
+				"postsPerBrief": 3,
+				"loadTime": 152.07049999999998,
+				"passed": true
+			},
+			{
+				"briefs": 20,
+				"postsPerBrief": 5,
+				"loadTime": 302.778416,
+				"passed": true
+			},
+			{
+				"briefs": 50,
+				"postsPerBrief": 8,
+				"loadTime": 1052.8385,
+				"passed": true
+			},
+			{
+				"briefs": 100,
+				"postsPerBrief": 10,
+				"loadTime": 2501.652083,
+				"passed": true
+			}
+		],
+		"formStability": [
+			{
+				"input": "Short brand name",
+				"cursorJumps": 0,
+				"passed": true
+			},
+			{
+				"input": "This is a much longer brand name with many characters",
+				"cursorJumps": 6,
+				"passed": false
+			},
+			{
+				"input": "Brand-with-special-chars_123!",
+				"cursorJumps": 3,
+				"passed": false
+			},
+			{
+				"input": "Unicode brand name 你好 ñáñó",
+				"cursorJumps": 3,
+				"passed": false
+			}
+		],
+		"realTimeUpdates": [
+			{
+				"updateType": "brief_status_change",
+				"updateTime": 185.92416700000103,
+				"passed": true
+			},
+			{
+				"updateType": "post_generation",
+				"updateTime": 349.6576669999995,
+				"passed": true
+			},
+			{
+				"updateType": "bulk_post_updates",
+				"updateTime": 265.7394170000007,
+				"passed": true
+			},
+			{
+				"updateType": "subscription_updates",
+				"updateTime": 130.4611670000013,
+				"passed": true
+			}
+		],
+		"memoryUsage": [
+			{
+				"iteration": 1,
+				"heapUsed": 4493000,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 2,
+				"heapUsed": 4500656,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 3,
+				"heapUsed": 4506552,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 4,
+				"heapUsed": 4512448,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 5,
+				"heapUsed": 4518624,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 6,
+				"heapUsed": 4524584,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 7,
+				"heapUsed": 4530584,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 8,
+				"heapUsed": 4536552,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 9,
+				"heapUsed": 4542704,
+				"heapTotal": 5324800,
+				"external": 1495533
+			},
+			{
+				"iteration": 10,
+				"heapUsed": 4548536,
+				"heapTotal": 5324800,
+				"external": 1495533
+			}
+		]
+	}
+}

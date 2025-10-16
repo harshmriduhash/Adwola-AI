@@ -1,0 +1,6 @@
+onlyBuiltDependencies:
+  - es5-ext
+  - fsevents
+  - sharp
+  - supabase
+  - unrs-resolver

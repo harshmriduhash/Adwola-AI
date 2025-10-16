@@ -1,0 +1,2 @@
+-- Initial seed data (empty for now)
+-- This file can be used to populate the database with initial data

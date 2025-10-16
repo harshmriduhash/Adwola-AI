@@ -1,0 +1,28 @@
+{
+    "mcpServers": {
+      "mem0-memory-mcp": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@smithery/cli@latest",
+          "run",
+          "@mem0ai/mem0-memory-mcp",
+          "--key",
+          "fc1c0930-c457-4042-8088-e052f8dff806",
+          "--profile",
+          "loose-goat-4drgNz"
+        ]
+      },
+    "context7-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@upstash/context7-mcp",
+        "--key",
+        "fc1c0930-c457-4042-8088-e052f8dff806"
+      ]
+    }
+  }
+}

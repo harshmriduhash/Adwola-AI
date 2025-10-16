@@ -1,0 +1,52 @@
+{
+	"deno.enablePaths": ["supabase/functions"],
+	"deno.lint": true,
+	"deno.unstable": [
+		"bare-node-builtins",
+		"byonm",
+		"sloppy-imports",
+		"unsafe-proto",
+		"webgpu",
+		"broadcast-channel",
+		"worker-options",
+		"cron",
+		"kv",
+		"ffi",
+		"fs",
+		"http",
+		"net"
+	],
+	"biome.enabled": true,
+	"biome.requireConfiguration": false,
+	"biome.configurationPath": "./biome.json",
+	"biome.lsp.trace.server": "off",
+	"biome.suggestInstallingGlobally": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit",
+		"source.fixAll.biome": "explicit",
+		"quickfix.biome": "explicit"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	}
+}
