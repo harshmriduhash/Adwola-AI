@@ -424,6 +424,6 @@ We'd love to hear your ideas! [Submit a feature request](https://github.com/hars
 
 **Made with ❤️ by Harsh Mriduhash**
 
-[GitHub](https://github.com/harshmriduhash/amplifyai) • [Documentation](docs/) • [Issues](https://github.com/harshmriduhash/amplifyai/issues)
+[GitHub](https://github.com/harshmriduhash/adwola) • [Documentation](docs/) • [Issues](https://github.com/harshmriduhash/amplifyai/issues)
 
 </div>
