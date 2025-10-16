@@ -8,7 +8,7 @@
 // components/PerformanceMonitor.tsx
 "use client";
 
-import { Profiler, ProfilerOnRenderCallback } from 'react';
+import { Profiler, ProfilerOnRenderCallback } from "react";
 
 const onRenderCallback: ProfilerOnRenderCallback = (
   id, // the "id" prop of the Profiler tree that has just committed
@@ -25,23 +25,26 @@ const onRenderCallback: ProfilerOnRenderCallback = (
       actualDuration,
       baseDuration,
       startTime,
-      commitTime
+      commitTime,
     });
-    
+
     // Send to analytics
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'slow_render', {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "slow_render", {
         component_id: id,
         duration: actualDuration,
-        phase: phase
+        phase: phase,
       });
     }
   }
 };
 
-export function PerformanceMonitor({ children, id }: { 
-  children: React.ReactNode; 
-  id: string; 
+export function PerformanceMonitor({
+  children,
+  id,
+}: {
+  children: React.ReactNode;
+  id: string;
 }) {
   return (
     <Profiler id={id} onRender={onRenderCallback}>
@@ -77,46 +80,59 @@ export class QueryPerformanceMonitor {
     userId?: string
   ): Promise<T> {
     const startTime = performance.now();
-    
+
     try {
       const result = await queryFn();
       const duration = performance.now() - startTime;
-      
+
       // Log slow queries (> 1000ms)
       if (duration > 1000) {
         this.slowQueries.push({
           query: queryName,
           duration,
           timestamp: new Date(),
-          userId
+          userId,
         });
-        
-        console.warn(`Slow query detected: ${queryName} (${duration.toFixed(2)}ms)`);
-        
+
+        console.warn(
+          `Slow query detected: ${queryName} (${duration.toFixed(2)}ms)`
+        );
+
         // Send to Supabase for analysis
         if (userId) {
-          await this.logSlowQueryToDatabase(userId, queryName, Math.round(duration));
+          await this.logSlowQueryToDatabase(
+            userId,
+            queryName,
+            Math.round(duration)
+          );
         }
       }
-      
+
       return result;
     } catch (error) {
       const duration = performance.now() - startTime;
-      console.error(`Query failed: ${queryName} (${duration.toFixed(2)}ms)`, error);
+      console.error(
+        `Query failed: ${queryName} (${duration.toFixed(2)}ms)`,
+        error
+      );
       throw error;
     }
   }
 
-  private async logSlowQueryToDatabase(userId: string, queryType: string, duration: number) {
+  private async logSlowQueryToDatabase(
+    userId: string,
+    queryType: string,
+    duration: number
+  ) {
     // This would call the SQL function we created
     try {
-      await fetch('/api/log-slow-query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, queryType, duration })
+      await fetch("/api/log-slow-query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, queryType, duration }),
       });
     } catch (error) {
-      console.error('Failed to log slow query:', error);
+      console.error("Failed to log slow query:", error);
     }
   }
 
@@ -135,33 +151,37 @@ export class QueryPerformanceMonitor {
 ```typescript
 // lib/performance/subscription-monitor.ts
 export class SubscriptionPerformanceMonitor {
-  private subscriptionMetrics = new Map<string, {
-    messageCount: number;
-    lastMessageTime: Date;
-    totalLatency: number;
-    avgLatency: number;
-  }>();
+  private subscriptionMetrics = new Map<
+    string,
+    {
+      messageCount: number;
+      lastMessageTime: Date;
+      totalLatency: number;
+      avgLatency: number;
+    }
+  >();
 
   trackMessage(channelName: string, messageTimestamp: number) {
     const now = Date.now();
     const latency = now - messageTimestamp;
-    
+
     const existing = this.subscriptionMetrics.get(channelName) || {
       messageCount: 0,
       lastMessageTime: new Date(),
       totalLatency: 0,
-      avgLatency: 0
+      avgLatency: 0,
     };
-    
+
     existing.messageCount++;
     existing.lastMessageTime = new Date();
     existing.totalLatency += latency;
     existing.avgLatency = existing.totalLatency / existing.messageCount;
-    
+
     this.subscriptionMetrics.set(channelName, existing);
-    
+
     // Alert on high latency
-    if (latency > 2000) { // 2 seconds
+    if (latency > 2000) {
+      // 2 seconds
       console.warn(`High subscription latency: ${channelName} (${latency}ms)`);
     }
   }
@@ -220,6 +240,7 @@ export class SubscriptionPerformanceMonitor {
 ## Performance Review Checklist
 
 ### React Components
+
 - [ ] useCallback for event handlers
 - [ ] useMemo for expensive calculations
 - [ ] React.memo for stable components
@@ -227,18 +248,21 @@ export class SubscriptionPerformanceMonitor {
 - [ ] No inline object/function creation in render
 
 ### Database Queries
+
 - [ ] Proper indexing for query patterns
 - [ ] Pagination for large datasets
 - [ ] Separate queries for optimization
 - [ ] Avoid N+1 query patterns
 
 ### Real-time Subscriptions
+
 - [ ] Minimal payload size
 - [ ] Proper subscription cleanup
 - [ ] Debounced state updates
 - [ ] Error handling and reconnection
 
 ### Forms
+
 - [ ] Stable component references
 - [ ] Controlled input patterns
 - [ ] Proper event handler memoization
@@ -266,21 +290,21 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
-          cache: 'pnpm'
-      
+          node-version: "18"
+          cache: "pnpm"
+
       - name: Install dependencies
         run: pnpm install
-      
+
       - name: Run performance tests
         run: node performance-test.js
-      
+
       - name: Upload results
         uses: actions/upload-artifact@v3
         with:
           name: performance-results
           path: performance-test-results.json
-      
+
       - name: Performance regression check
         run: |
           if [ -f performance-test-results.json ]; then
@@ -296,7 +320,7 @@ jobs:
 
 ```typescript
 // scripts/performance-regression.ts
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync } from "fs";
 
 interface PerformanceResult {
   timestamp: string;
@@ -305,27 +329,35 @@ interface PerformanceResult {
 }
 
 function detectRegression() {
-  const currentFile = 'performance-test-results.json';
-  const baselineFile = 'performance-baseline.json';
-  
+  const currentFile = "performance-test-results.json";
+  const baselineFile = "performance-baseline.json";
+
   if (!existsSync(currentFile) || !existsSync(baselineFile)) {
-    console.log('Missing performance files for comparison');
+    console.log("Missing performance files for comparison");
     return;
   }
-  
-  const current: PerformanceResult = JSON.parse(readFileSync(currentFile, 'utf8'));
-  const baseline: PerformanceResult = JSON.parse(readFileSync(baselineFile, 'utf8'));
-  
+
+  const current: PerformanceResult = JSON.parse(
+    readFileSync(currentFile, "utf8")
+  );
+  const baseline: PerformanceResult = JSON.parse(
+    readFileSync(baselineFile, "utf8")
+  );
+
   const scoreDiff = current.score - baseline.score;
   const regressionThreshold = -10; // 10% drop
-  
+
   if (scoreDiff < regressionThreshold) {
     console.error(`Performance regression detected: ${scoreDiff}%`);
     console.error(`Current: ${current.score}%, Baseline: ${baseline.score}%`);
     process.exit(1);
   }
-  
-  console.log(`Performance check passed: ${current.score}% (${scoreDiff > 0 ? '+' : ''}${scoreDiff}%)`);
+
+  console.log(
+    `Performance check passed: ${current.score}% (${
+      scoreDiff > 0 ? "+" : ""
+    }${scoreDiff}%)`
+  );
 }
 
 detectRegression();
@@ -338,30 +370,40 @@ detectRegression();
 ```typescript
 // lib/performance/alerts.ts
 export class PerformanceAlerts {
-  static async sendSlowQueryAlert(query: string, duration: number, userId: string) {
-    if (duration > 5000) { // 5 seconds
-      await fetch('/api/alerts/slack', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+  static async sendSlowQueryAlert(
+    query: string,
+    duration: number,
+    userId: string
+  ) {
+    if (duration > 5000) {
+      // 5 seconds
+      await fetch("/api/alerts/slack", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          channel: '#performance',
+          channel: "#performance",
           text: `🚨 Critical slow query detected: ${query} (${duration}ms) for user ${userId}`,
-          priority: 'high'
-        })
+          priority: "high",
+        }),
       });
     }
   }
 
   static async sendMemoryAlert(usage: number) {
-    if (usage > 100 * 1024 * 1024) { // 100MB
-      await fetch('/api/alerts/email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+    if (usage > 100 * 1024 * 1024) {
+      // 100MB
+      await fetch("/api/alerts/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          to: 'dev-team@company.com',
-          subject: 'Memory usage alert',
-          body: `Memory usage exceeded threshold: ${(usage / 1024 / 1024).toFixed(2)}MB`
-        })
+          to: "dev-team@company.com",
+          subject: "Memory usage alert",
+          body: `Memory usage exceeded threshold: ${(
+            usage /
+            1024 /
+            1024
+          ).toFixed(2)}MB`,
+        }),
       });
     }
   }
@@ -374,13 +416,13 @@ export class PerformanceAlerts {
 // components/HealthMonitor.tsx
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export function HealthMonitor() {
   const [health, setHealth] = useState({
-    dashboard: 'healthy',
-    database: 'healthy',
-    realtime: 'healthy'
+    dashboard: "healthy",
+    database: "healthy",
+    realtime: "healthy",
   });
 
   useEffect(() => {
@@ -388,26 +430,25 @@ export function HealthMonitor() {
       try {
         // Check dashboard responsiveness
         const dashboardStart = performance.now();
-        await fetch('/api/health/dashboard');
+        await fetch("/api/health/dashboard");
         const dashboardTime = performance.now() - dashboardStart;
-        
+
         // Check database connectivity
         const dbStart = performance.now();
-        await fetch('/api/health/database');
+        await fetch("/api/health/database");
         const dbTime = performance.now() - dbStart;
-        
+
         setHealth({
-          dashboard: dashboardTime > 3000 ? 'slow' : 'healthy',
-          database: dbTime > 2000 ? 'slow' : 'healthy',
-          realtime: 'healthy' // Add WebSocket health check
+          dashboard: dashboardTime > 3000 ? "slow" : "healthy",
+          database: dbTime > 2000 ? "slow" : "healthy",
+          realtime: "healthy", // Add WebSocket health check
         });
-        
       } catch (error) {
-        console.error('Health check failed:', error);
+        console.error("Health check failed:", error);
         setHealth({
-          dashboard: 'error',
-          database: 'error',
-          realtime: 'error'
+          dashboard: "error",
+          database: "error",
+          realtime: "error",
         });
       }
     };
@@ -415,24 +456,33 @@ export function HealthMonitor() {
     // Check every 30 seconds
     const interval = setInterval(checkHealth, 30000);
     checkHealth(); // Initial check
-    
+
     return () => clearInterval(interval);
   }, []);
 
-  const hasIssues = Object.values(health).some(status => status !== 'healthy');
-  
+  const hasIssues = Object.values(health).some(
+    (status) => status !== "healthy"
+  );
+
   if (!hasIssues) return null;
-  
+
   return (
     <div className="fixed top-4 right-4 bg-yellow-100 border border-yellow-400 rounded p-3">
       <h4 className="font-semibold text-yellow-800">System Health</h4>
       {Object.entries(health).map(([service, status]) => (
         <div key={service} className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full ${
-            status === 'healthy' ? 'bg-green-500' : 
-            status === 'slow' ? 'bg-yellow-500' : 'bg-red-500'
-          }`} />
-          <span className="text-sm">{service}: {status}</span>
+          <span
+            className={`w-2 h-2 rounded-full ${
+              status === "healthy"
+                ? "bg-green-500"
+                : status === "slow"
+                ? "bg-yellow-500"
+                : "bg-red-500"
+            }`}
+          />
+          <span className="text-sm">
+            {service}: {status}
+          </span>
         </div>
       ))}
     </div>
