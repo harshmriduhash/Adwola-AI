@@ -5,33 +5,33 @@ import { useEffect, useState } from "react";
  * Returns true if user prefers reduced motion
  */
 export function useReducedMotion(): boolean {
-	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-	useEffect(() => {
-		if (typeof window === "undefined") {
-			return;
-		}
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
 
-		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-		// Set initial value
-		setPrefersReducedMotion(mediaQuery.matches);
+    // Set initial value
+    setPrefersReducedMotion(mediaQuery.matches);
 
-		// Listen for changes
-		const handleChange = (event: MediaQueryListEvent) => {
-			setPrefersReducedMotion(event.matches);
-		};
+    // Listen for changes
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
 
-		// Add event listener
-		mediaQuery.addEventListener("change", handleChange);
+    // Add event listener
+    mediaQuery.addEventListener("change", handleChange);
 
-		// Cleanup
-		return () => {
-			mediaQuery.removeEventListener("change", handleChange);
-		};
-	}, []);
+    // Cleanup
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
 
-	return prefersReducedMotion;
+  return prefersReducedMotion;
 }
 
 /**
@@ -39,21 +39,21 @@ export function useReducedMotion(): boolean {
  * Returns appropriate animation variants based on user's motion preferences
  */
 export function useAccessibleAnimation() {
-	const prefersReducedMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
 
-	const getVariants = (normalVariants: any, reducedVariants?: any) => {
-		return prefersReducedMotion ? reducedVariants || {} : normalVariants;
-	};
+  const getVariants = (normalVariants: any, reducedVariants?: any) => {
+    return prefersReducedMotion ? reducedVariants || {} : normalVariants;
+  };
 
-	const getTransition = (normalTransition: any, reducedTransition?: any) => {
-		return prefersReducedMotion
-			? reducedTransition || { duration: 0 }
-			: normalTransition;
-	};
+  const getTransition = (normalTransition: any, reducedTransition?: any) => {
+    return prefersReducedMotion
+      ? reducedTransition || { duration: 0 }
+      : normalTransition;
+  };
 
-	return {
-		prefersReducedMotion,
-		getVariants,
-		getTransition,
-	};
+  return {
+    prefersReducedMotion,
+    getVariants,
+    getTransition,
+  };
 }
