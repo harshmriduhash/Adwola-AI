@@ -7,19 +7,19 @@ import { useCallback, useEffect, useRef, useState } from "react";
  * @returns The debounced value
  */
 export function useDebounce<T>(value: T, delay: number): T {
-	const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-	useEffect(() => {
-		const handler = setTimeout(() => {
-			setDebouncedValue(value);
-		}, delay);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
 
-		return () => {
-			clearTimeout(handler);
-		};
-	}, [value, delay]);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
 
-	return debouncedValue;
+  return debouncedValue;
 }
 
 /**
@@ -30,36 +30,36 @@ export function useDebounce<T>(value: T, delay: number): T {
  * @returns The debounced callback function
  */
 export function useDebouncedCallback<T extends (...args: any[]) => any>(
-	callback: T,
-	delay: number,
-	deps: React.DependencyList = [],
+  callback: T,
+  delay: number,
+  deps: React.DependencyList = []
 ): T {
-	const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-	const debouncedCallback = useCallback(
-		(...args: Parameters<T>) => {
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current);
-			}
+  const debouncedCallback = useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
 
-			timeoutRef.current = setTimeout(() => {
-				callback(...args);
-			}, delay);
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[callback, delay, ...deps],
-	) as T;
+      timeoutRef.current = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [callback, delay, ...deps]
+  ) as T;
 
-	// Cleanup on unmount
-	useEffect(() => {
-		return () => {
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current);
-			}
-		};
-	}, []);
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
-	return debouncedCallback;
+  return debouncedCallback;
 }
 
 /**
@@ -70,21 +70,21 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
  * @returns Object with immediate value, debounced value, and setter
  */
 export function useImmediateAndDebounced<T>(
-	initialValue: T,
-	delay: number,
+  initialValue: T,
+  delay: number
 ): {
-	immediate: T;
-	debounced: T;
-	setValue: (value: T) => void;
+  immediate: T;
+  debounced: T;
+  setValue: (value: T) => void;
 } {
-	const [immediate, setImmediate] = useState<T>(initialValue);
-	const debounced = useDebounce(immediate, delay);
+  const [immediate, setImmediate] = useState<T>(initialValue);
+  const debounced = useDebounce(immediate, delay);
 
-	return {
-		immediate,
-		debounced,
-		setValue: setImmediate,
-	};
+  return {
+    immediate,
+    debounced,
+    setValue: setImmediate,
+  };
 }
 
 /**
@@ -94,60 +94,60 @@ export function useImmediateAndDebounced<T>(
  * @returns Object with search term, debounced search, loading state, and setters
  */
 export function useDebouncedSearch<T>(
-	searchFunction: (term: string) => Promise<T>,
-	delay: number = 300,
+  searchFunction: (term: string) => Promise<T>,
+  delay: number = 300
 ): {
-	searchTerm: string;
-	setSearchTerm: (term: string) => void;
-	results: T | null;
-	loading: boolean;
-	error: string | null;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  results: T | null;
+  loading: boolean;
+  error: string | null;
 } {
-	const [searchTerm, setSearchTerm] = useState("");
-	const [results, setResults] = useState<T | null>(null);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState<T | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-	const debouncedSearchTerm = useDebounce(searchTerm, delay);
+  const debouncedSearchTerm = useDebounce(searchTerm, delay);
 
-	useEffect(() => {
-		if (!debouncedSearchTerm.trim()) {
-			setResults(null);
-			setLoading(false);
-			setError(null);
-			return;
-		}
+  useEffect(() => {
+    if (!debouncedSearchTerm.trim()) {
+      setResults(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
 
-		let cancelled = false;
-		setLoading(true);
-		setError(null);
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
 
-		searchFunction(debouncedSearchTerm)
-			.then((result) => {
-				if (!cancelled) {
-					setResults(result);
-					setLoading(false);
-				}
-			})
-			.catch((err) => {
-				if (!cancelled) {
-					setError(err.message || "Search failed");
-					setLoading(false);
-				}
-			});
+    searchFunction(debouncedSearchTerm)
+      .then((result) => {
+        if (!cancelled) {
+          setResults(result);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err.message || "Search failed");
+          setLoading(false);
+        }
+      });
 
-		return () => {
-			cancelled = true;
-		};
-	}, [debouncedSearchTerm, searchFunction]);
+    return () => {
+      cancelled = true;
+    };
+  }, [debouncedSearchTerm, searchFunction]);
 
-	return {
-		searchTerm,
-		setSearchTerm,
-		results,
-		loading,
-		error,
-	};
+  return {
+    searchTerm,
+    setSearchTerm,
+    results,
+    loading,
+    error,
+  };
 }
 
 /**
@@ -157,42 +157,42 @@ export function useDebouncedSearch<T>(
  * @returns Object with debounced value and cancel function
  */
 export function useCancellableDebounce<T>(
-	value: T,
-	delay: number,
+  value: T,
+  delay: number
 ): {
-	debouncedValue: T;
-	cancel: () => void;
-	isPending: boolean;
+  debouncedValue: T;
+  cancel: () => void;
+  isPending: boolean;
 } {
-	const [debouncedValue, setDebouncedValue] = useState<T>(value);
-	const [isPending, setIsPending] = useState(false);
-	const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  const [isPending, setIsPending] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-	const cancel = useCallback(() => {
-		if (timeoutRef.current) {
-			clearTimeout(timeoutRef.current);
-			setIsPending(false);
-		}
-	}, []);
+  const cancel = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      setIsPending(false);
+    }
+  }, []);
 
-	useEffect(() => {
-		setIsPending(true);
+  useEffect(() => {
+    setIsPending(true);
 
-		const handler = setTimeout(() => {
-			setDebouncedValue(value);
-			setIsPending(false);
-		}, delay);
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+      setIsPending(false);
+    }, delay);
 
-		timeoutRef.current = handler;
+    timeoutRef.current = handler;
 
-		return () => {
-			clearTimeout(handler);
-		};
-	}, [value, delay]);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
 
-	return {
-		debouncedValue,
-		cancel,
-		isPending,
-	};
+  return {
+    debouncedValue,
+    cancel,
+    isPending,
+  };
 }
