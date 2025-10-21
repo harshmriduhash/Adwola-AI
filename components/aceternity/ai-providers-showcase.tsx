@@ -268,21 +268,25 @@ export const AIProvidersShowcase = memo(function AIProvidersShowcase({
             Powered by Leading AI
           </span>
         </motion.div>
-        
+
         <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
           Multi-AI Intelligence
         </h2>
-        
+
         <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-          Harness the collective power of the world&apos;s most advanced AI models for
-          unparalleled content creation and strategic insights.
+          Harness the collective power of the world&apos;s most advanced AI
+          models for unparalleled content creation and strategic insights.
         </p>
       </motion.div>
 
       {/* AI Provider Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
         {aiProviders.map((provider, index) => (
-          <ProviderCard key={provider.title} provider={provider} index={index} />
+          <ProviderCard
+            key={provider.title}
+            provider={provider}
+            index={index}
+          />
         ))}
       </div>
 
@@ -299,7 +303,7 @@ export const AIProvidersShowcase = memo(function AIProvidersShowcase({
           ease: "easeInOut",
         }}
       />
-      
+
       <motion.div
         className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl -z-10"
         animate={{
