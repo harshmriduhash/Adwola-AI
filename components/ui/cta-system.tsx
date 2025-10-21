@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 interface CTAButtonProps {
   href: string;
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'lg';
-  iconName?: 'sparkles' | 'arrow-right' | 'play';
-  iconPosition?: 'left' | 'right';
-  animation?: 'glow' | 'slide' | 'bounce';
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "lg";
+  iconName?: "sparkles" | "arrow-right" | "play";
+  iconPosition?: "left" | "right";
+  animation?: "glow" | "slide" | "bounce";
   className?: string;
   onClick?: () => void;
 }
@@ -24,44 +24,44 @@ interface CTAButtonProps {
 export const CTAButton = memo(function CTAButton({
   href,
   children,
-  variant = 'primary',
-  size = 'lg',
+  variant = "primary",
+  size = "lg",
   iconName,
-  iconPosition = 'right',
-  animation = 'glow',
+  iconPosition = "right",
+  animation = "glow",
   className,
   onClick,
 }: CTAButtonProps) {
   const getIcon = (iconName?: string) => {
     switch (iconName) {
-      case 'sparkles':
+      case "sparkles":
         return Sparkles;
-      case 'arrow-right':
+      case "arrow-right":
         return ArrowRight;
-      case 'play':
+      case "play":
         return Play;
       default:
         return null;
     }
   };
-  
+
   const Icon = getIcon(iconName);
   return (
     <AnimatedButton
-      variant={variant === 'primary' ? 'gradient' : variant}
+      variant={variant === "primary" ? "gradient" : variant}
       size={size}
       animation={animation}
       className={cn(
-        variant === 'primary' && "min-w-[200px] shadow-lg",
-        variant === 'secondary' && "min-w-[160px]",
+        variant === "primary" && "min-w-[200px] shadow-lg",
+        variant === "secondary" && "min-w-[160px]",
         className
       )}
       asChild
     >
       <Link href={href} onClick={onClick}>
-        {Icon && iconPosition === 'left' && <Icon className="mr-2 w-4 h-4" />}
+        {Icon && iconPosition === "left" && <Icon className="mr-2 w-4 h-4" />}
         {children}
-        {Icon && iconPosition === 'right' && <Icon className="ml-2 w-4 h-4" />}
+        {Icon && iconPosition === "right" && <Icon className="ml-2 w-4 h-4" />}
       </Link>
     </AnimatedButton>
   );
@@ -74,16 +74,16 @@ export const ctaSets = {
     main: {
       href: "/auth/sign-up",
       text: "Start Creating Now",
-      iconName: 'sparkles' as const,
-      iconPosition: 'left' as const,
-      variant: 'primary' as const,
+      iconName: "sparkles" as const,
+      iconPosition: "left" as const,
+      variant: "primary" as const,
     },
     secondary: {
       href: "/campaigns",
       text: "Try Demo",
-      iconName: 'play' as const,
-      iconPosition: 'left' as const,
-      variant: 'outline' as const,
+      iconName: "play" as const,
+      iconPosition: "left" as const,
+      variant: "outline" as const,
     },
   },
 
@@ -92,13 +92,13 @@ export const ctaSets = {
     getStarted: {
       href: "/auth/sign-up",
       text: "Get Started Free",
-      iconName: 'arrow-right' as const,
-      variant: 'primary' as const,
+      iconName: "arrow-right" as const,
+      variant: "primary" as const,
     },
     learnMore: {
       href: "#features",
       text: "Learn More",
-      variant: 'ghost' as const,
+      variant: "ghost" as const,
     },
   },
 
@@ -107,14 +107,14 @@ export const ctaSets = {
     main: {
       href: "/auth/sign-up",
       text: "Start Your Free Trial",
-      iconName: 'sparkles' as const,
-      variant: 'primary' as const,
+      iconName: "sparkles" as const,
+      variant: "primary" as const,
     },
     demo: {
       href: "/campaigns",
       text: "Try Demo",
-      iconName: 'play' as const,
-      variant: 'outline' as const,
+      iconName: "play" as const,
+      variant: "outline" as const,
     },
   },
 } as const;
@@ -125,20 +125,20 @@ interface CTASectionProps {
   subtitle?: string;
   badge?: {
     text: string;
-    iconName?: 'users' | 'zap' | 'sparkles';
+    iconName?: "users" | "zap" | "sparkles";
   };
   primaryCTA: {
     href: string;
     text: string;
-    iconName?: 'sparkles' | 'arrow-right' | 'play';
+    iconName?: "sparkles" | "arrow-right" | "play";
   };
   secondaryCTA?: {
     href: string;
     text: string;
-    iconName?: 'sparkles' | 'arrow-right' | 'play';
+    iconName?: "sparkles" | "arrow-right" | "play";
   };
   trustSignals?: string[];
-  backgroundVariant?: 'default' | 'gradient' | 'primary' | 'accent';
+  backgroundVariant?: "default" | "gradient" | "primary" | "accent";
   className?: string;
 }
 
@@ -149,64 +149,72 @@ export const CTASection = memo(function CTASection({
   primaryCTA,
   secondaryCTA,
   trustSignals,
-  backgroundVariant = 'gradient',
+  backgroundVariant = "gradient",
   className,
 }: CTASectionProps) {
   const getBadgeIcon = (iconName?: string) => {
     switch (iconName) {
-      case 'users':
+      case "users":
         return Users;
-      case 'zap':
+      case "zap":
         return Zap;
-      case 'sparkles':
+      case "sparkles":
         return Sparkles;
       default:
         return Users; // Default fallback
     }
   };
-  
+
   const BadgeIcon = badge?.iconName ? getBadgeIcon(badge.iconName) : null;
-  
+
   const getPrimaryIcon = (iconName?: string) => {
     switch (iconName) {
-      case 'sparkles':
+      case "sparkles":
         return Sparkles;
-      case 'arrow-right':
+      case "arrow-right":
         return ArrowRight;
-      case 'play':
+      case "play":
         return Play;
       default:
         return null;
     }
   };
-  
-  const PrimaryIcon = primaryCTA.iconName ? getPrimaryIcon(primaryCTA.iconName) : null;
-  const SecondaryIcon = secondaryCTA?.iconName ? getPrimaryIcon(secondaryCTA.iconName) : null;
+
+  const PrimaryIcon = primaryCTA.iconName
+    ? getPrimaryIcon(primaryCTA.iconName)
+    : null;
+  const SecondaryIcon = secondaryCTA?.iconName
+    ? getPrimaryIcon(secondaryCTA.iconName)
+    : null;
 
   const getBackgroundClasses = () => {
     const variants = {
-      default: 'bg-white dark:bg-gray-900',
-      gradient: 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600',
-      primary: 'bg-gradient-to-r from-blue-600 to-purple-600',
-      accent: 'bg-gradient-to-r from-purple-600 to-pink-600',
+      default: "bg-white dark:bg-gray-900",
+      gradient: "bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600",
+      primary: "bg-gradient-to-r from-blue-600 to-purple-600",
+      accent: "bg-gradient-to-r from-purple-600 to-pink-600",
     };
     return variants[backgroundVariant];
   };
 
-  const isGradientBg = backgroundVariant !== 'default';
-  const textColor = isGradientBg ? 'text-white' : 'text-gray-900 dark:text-white';
-  const subtitleColor = isGradientBg ? 'text-blue-100' : 'text-muted-foreground';
+  const isGradientBg = backgroundVariant !== "default";
+  const textColor = isGradientBg
+    ? "text-white"
+    : "text-gray-900 dark:text-white";
+  const subtitleColor = isGradientBg
+    ? "text-blue-100"
+    : "text-muted-foreground";
 
   return (
-    <section className={cn(
-      "py-24 relative overflow-hidden",
-      getBackgroundClasses(),
-      className
-    )}>
-      {isGradientBg && (
-        <div className="absolute inset-0 bg-black/20" />
+    <section
+      className={cn(
+        "py-24 relative overflow-hidden",
+        getBackgroundClasses(),
+        className
       )}
-      
+    >
+      {isGradientBg && <div className="absolute inset-0 bg-black/20" />}
+
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal direction="up">
           {badge && (
@@ -224,20 +232,19 @@ export const CTASection = memo(function CTASection({
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={0.2}>
-          <h2 className={cn(
-            "text-3xl md:text-4xl lg:text-5xl font-bold mb-4",
-            textColor
-          )}>
+          <h2
+            className={cn(
+              "text-3xl md:text-4xl lg:text-5xl font-bold mb-4",
+              textColor
+            )}
+          >
             {title}
           </h2>
         </ScrollReveal>
 
         {subtitle && (
           <ScrollReveal direction="up" delay={0.4}>
-            <p className={cn(
-              "text-xl mb-8 max-w-2xl mx-auto",
-              subtitleColor
-            )}>
+            <p className={cn("text-xl mb-8 max-w-2xl mx-auto", subtitleColor)}>
               {subtitle}
             </p>
           </ScrollReveal>
@@ -251,7 +258,8 @@ export const CTASection = memo(function CTASection({
               animation="glow"
               className={cn(
                 "min-w-[200px]",
-                isGradientBg && "bg-white text-blue-600 hover:bg-blue-50 border-white"
+                isGradientBg &&
+                  "bg-white text-blue-600 hover:bg-blue-50 border-white"
               )}
               asChild
             >
@@ -268,8 +276,8 @@ export const CTASection = memo(function CTASection({
                 animation="slide"
                 className={cn(
                   "min-w-[160px]",
-                  isGradientBg 
-                    ? "text-white hover:bg-white/10 border border-white/30" 
+                  isGradientBg
+                    ? "text-white hover:bg-white/10 border border-white/30"
                     : "text-gray-700 dark:text-gray-300"
                 )}
                 asChild
@@ -283,27 +291,31 @@ export const CTASection = memo(function CTASection({
           </div>
         </ScrollReveal>
 
-        {trustSignals && Array.isArray(trustSignals) && trustSignals.length > 0 && (
-          <ScrollReveal direction="up" delay={0.8}>
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              {trustSignals.map((signal) => (
-                <div
-                  key={signal}
-                  className={cn(
-                    "flex items-center",
-                    isGradientBg ? "text-blue-100" : "text-muted-foreground"
-                  )}
-                >
-                  <div className={cn(
-                    "w-2 h-2 rounded-full mr-2",
-                    isGradientBg ? "bg-green-400" : "bg-green-500"
-                  )} />
-                  {signal}
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        )}
+        {trustSignals &&
+          Array.isArray(trustSignals) &&
+          trustSignals.length > 0 && (
+            <ScrollReveal direction="up" delay={0.8}>
+              <div className="flex flex-wrap justify-center gap-6 text-sm">
+                {trustSignals.map((signal) => (
+                  <div
+                    key={signal}
+                    className={cn(
+                      "flex items-center",
+                      isGradientBg ? "text-blue-100" : "text-muted-foreground"
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "w-2 h-2 rounded-full mr-2",
+                        isGradientBg ? "bg-green-400" : "bg-green-500"
+                      )}
+                    />
+                    {signal}
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+          )}
       </div>
     </section>
   );
@@ -314,53 +326,50 @@ interface InlineCTAProps {
   primaryCTA: {
     href: string;
     text: string;
-    iconName?: 'sparkles' | 'arrow-right' | 'play';
+    iconName?: "sparkles" | "arrow-right" | "play";
   };
   secondaryCTA?: {
     href: string;
     text: string;
-    iconName?: 'sparkles' | 'arrow-right' | 'play';
+    iconName?: "sparkles" | "arrow-right" | "play";
   };
-  layout?: 'horizontal' | 'vertical';
-  size?: 'sm' | 'lg';
+  layout?: "horizontal" | "vertical";
+  size?: "sm" | "lg";
   className?: string;
 }
 
 export const InlineCTA = memo(function InlineCTA({
   primaryCTA,
   secondaryCTA,
-  layout = 'horizontal',
-  size = 'lg',
+  layout = "horizontal",
+  size = "lg",
   className,
 }: InlineCTAProps) {
   const getIcon = (iconName?: string) => {
     switch (iconName) {
-      case 'sparkles':
+      case "sparkles":
         return Sparkles;
-      case 'arrow-right':
+      case "arrow-right":
         return ArrowRight;
-      case 'play':
+      case "play":
         return Play;
       default:
         return null;
     }
   };
-  
+
   const PrimaryIcon = getIcon(primaryCTA.iconName);
   const SecondaryIcon = getIcon(secondaryCTA?.iconName);
 
   return (
-    <div className={cn(
-      "flex gap-4 justify-center items-center",
-      layout === 'vertical' && "flex-col",
-      className
-    )}>
-      <AnimatedButton
-        variant="gradient"
-        size={size}
-        animation="glow"
-        asChild
-      >
+    <div
+      className={cn(
+        "flex gap-4 justify-center items-center",
+        layout === "vertical" && "flex-col",
+        className
+      )}
+    >
+      <AnimatedButton variant="gradient" size={size} animation="glow" asChild>
         <Link href={primaryCTA.href}>
           {PrimaryIcon && <PrimaryIcon className="mr-2 w-4 h-4" />}
           {primaryCTA.text}
@@ -368,12 +377,7 @@ export const InlineCTA = memo(function InlineCTA({
       </AnimatedButton>
 
       {secondaryCTA && (
-        <AnimatedButton
-          variant="outline"
-          size={size}
-          animation="slide"
-          asChild
-        >
+        <AnimatedButton variant="outline" size={size} animation="slide" asChild>
           <Link href={secondaryCTA.href}>
             {SecondaryIcon && <SecondaryIcon className="mr-2 w-4 h-4" />}
             {secondaryCTA.text}
@@ -446,10 +450,7 @@ export const CTASections = {
         text: "Claim 50% Discount",
         iconName: "arrow-right",
       }}
-      trustSignals={[
-        "Offer expires in 6 days",
-        "No credit card required",
-      ]}
+      trustSignals={["Offer expires in 6 days", "No credit card required"]}
       backgroundVariant="accent"
     />
   ),
