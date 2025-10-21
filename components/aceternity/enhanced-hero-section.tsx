@@ -94,7 +94,7 @@ const TrustSignals = memo(function TrustSignals() {
 
   return (
     <ScrollReveal direction="up" delay={1.0}>
-      <motion.div 
+      <motion.div
         className="flex flex-wrap justify-center gap-6 mb-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -156,8 +156,8 @@ const HeroContent = memo(function HeroContent() {
             )}
             aria-label="New feature announcement"
           >
-            <Sparkles className="w-4 h-4 mr-2" />
-✨ Live Platform - Start Creating Today
+            <Sparkles className="w-4 h-4 mr-2" />✨ Live Platform - Start
+            Creating Today
           </Badge>
         </motion.div>
       </ScrollReveal>
