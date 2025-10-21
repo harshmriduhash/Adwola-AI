@@ -29,9 +29,9 @@ const FloatingParticle = memo(function FloatingParticle({
 
       const rect = containerRef.current.getBoundingClientRect();
       const newY = (particle.y + particle.speed) % (rect.height + 100);
-      
+
       particleRef.current.style.transform = `translate(${particle.x}px, ${newY}px)`;
-      
+
       // Update particle position for next frame
       particle.y = newY;
     };
@@ -43,10 +43,7 @@ const FloatingParticle = memo(function FloatingParticle({
   return (
     <motion.div
       ref={particleRef}
-      className={cn(
-        "absolute rounded-full blur-sm opacity-20",
-        particle.color
-      )}
+      className={cn("absolute rounded-full blur-sm opacity-20", particle.color)}
       style={{
         width: particle.size,
         height: particle.size,
@@ -80,7 +77,7 @@ const GradientOrb = memo(function GradientOrb({
   animationDelay?: number;
 }) {
   const prefersReducedMotion = useReducedMotion();
-  
+
   const sizeClasses = {
     small: "w-32 h-32",
     medium: "w-64 h-64",
@@ -185,7 +182,7 @@ export const AnimatedBackground = memo(function AnimatedBackground({
   // Initialize particles only on client side to avoid hydration mismatch
   useEffect(() => {
     setIsClient(true);
-    
+
     if (showParticles && !prefersReducedMotion) {
       const generatedParticles = Array.from({ length: 20 }, (_, i) => ({
         id: i,
@@ -209,7 +206,8 @@ export const AnimatedBackground = memo(function AnimatedBackground({
     switch (variant) {
       case "hero":
         return {
-          baseGradient: "bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20",
+          baseGradient:
+            "bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-purple-900/20",
           orbs: [
             {
               size: "large" as const,
@@ -233,7 +231,8 @@ export const AnimatedBackground = memo(function AnimatedBackground({
         };
       case "minimal":
         return {
-          baseGradient: "bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800",
+          baseGradient:
+            "bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800",
           orbs: [
             {
               size: "medium" as const,
@@ -245,7 +244,8 @@ export const AnimatedBackground = memo(function AnimatedBackground({
         };
       default:
         return {
-          baseGradient: "bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900",
+          baseGradient:
+            "bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900",
           orbs: [
             {
               size: "large" as const,
@@ -284,17 +284,20 @@ export const AnimatedBackground = memo(function AnimatedBackground({
       ))}
 
       {/* Floating particles */}
-      {isClient && showParticles && !prefersReducedMotion && particles.length > 0 && (
-        <>
-          {particles.map((particle) => (
-            <FloatingParticle
-              key={particle.id}
-              particle={particle}
-              containerRef={containerRef}
-            />
-          ))}
-        </>
-      )}
+      {isClient &&
+        showParticles &&
+        !prefersReducedMotion &&
+        particles.length > 0 && (
+          <>
+            {particles.map((particle) => (
+              <FloatingParticle
+                key={particle.id}
+                particle={particle}
+                containerRef={containerRef}
+              />
+            ))}
+          </>
+        )}
 
       {/* Radial gradient overlay */}
       <RadialGradient />
