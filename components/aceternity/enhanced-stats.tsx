@@ -32,7 +32,8 @@ const stats: StatItem[] = [
     icon: Zap,
     color: "text-blue-500",
     gradient: "from-blue-500/20 to-cyan-500/20",
-    description: "Reduce content creation time from hours to minutes with AI automation",
+    description:
+      "Reduce content creation time from hours to minutes with AI automation",
     trend: { direction: "up", percentage: 12 },
   },
   {
@@ -54,7 +55,8 @@ const stats: StatItem[] = [
     icon: Users,
     color: "text-green-500",
     gradient: "from-green-500/20 to-emerald-500/20",
-    description: "Trusted by growing businesses and marketing agencies globally",
+    description:
+      "Trusted by growing businesses and marketing agencies globally",
     trend: { direction: "up", percentage: 18 },
   },
   {
@@ -75,7 +77,8 @@ const stats: StatItem[] = [
     icon: TrendingUp,
     color: "text-teal-500",
     gradient: "from-teal-500/20 to-cyan-500/20",
-    description: "Enterprise-grade infrastructure ensuring consistent availability",
+    description:
+      "Enterprise-grade infrastructure ensuring consistent availability",
     trend: { direction: "up", percentage: 2 },
   },
   {
@@ -86,7 +89,8 @@ const stats: StatItem[] = [
     icon: Clock,
     color: "text-indigo-500",
     gradient: "from-indigo-500/20 to-purple-500/20",
-    description: "Exceptional user experience with industry-leading satisfaction scores",
+    description:
+      "Exceptional user experience with industry-leading satisfaction scores",
     trend: { direction: "up", percentage: 8 },
   },
 ];
@@ -149,7 +153,6 @@ const StatCard = memo(function StatCard({
     },
   };
 
-
   return (
     <motion.div
       variants={cardVariants}
@@ -182,7 +185,9 @@ const StatCard = memo(function StatCard({
       <motion.div
         className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          boxShadow: `0 0 30px ${stat.color.replace("text-", "").replace("-500", "")}`,
+          boxShadow: `0 0 30px ${stat.color
+            .replace("text-", "")
+            .replace("-500", "")}`,
           filter: "blur(20px)",
         }}
       />
@@ -202,7 +207,7 @@ const StatCard = memo(function StatCard({
           >
             <Icon className={cn("w-6 h-6", stat.color)} />
           </motion.div>
-          
+
           <TrendIndicator trend={stat.trend} />
         </div>
 
@@ -212,7 +217,11 @@ const StatCard = memo(function StatCard({
             className={cn("text-4xl lg:text-5xl font-bold", stat.color)}
             initial={{ scale: 0 }}
             animate={isVisible ? { scale: 1 } : { scale: 0 }}
-            transition={{ delay: index * 0.1 + 0.3, duration: 0.5, ease: "backOut" }}
+            transition={{
+              delay: index * 0.1 + 0.3,
+              duration: 0.5,
+              ease: "backOut",
+            }}
           >
             {isVisible ? (
               <CountingAnimation
@@ -225,7 +234,7 @@ const StatCard = memo(function StatCard({
               `${stat.value}${stat.suffix}`
             )}
           </motion.div>
-          
+
           <div className="space-y-1">
             <div className="font-semibold text-gray-900 dark:text-white">
               {stat.label}
@@ -346,7 +355,7 @@ export const EnhancedStats = memo(function EnhancedStats({
           ease: "easeInOut",
         }}
       />
-      
+
       <motion.div
         className="absolute bottom-10 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl"
         animate={{
