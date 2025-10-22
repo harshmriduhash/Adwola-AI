@@ -17,7 +17,10 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
-import { adwolaDesignSystem, adwolaMessaging } from "@/lib/adwola-design-system";
+import {
+  adwolaDesignSystem,
+  adwolaMessaging,
+} from "@/lib/adwola-design-system";
 import { AnimatedButton } from "@/components/ui/animated-button";
 import { Input } from "@/components/ui/input";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -51,7 +54,11 @@ const navigationLinks = [
 
 const socialLinks = [
   { name: "Twitter", href: "https://twitter.com/adwola", icon: Twitter },
-  { name: "LinkedIn", href: "https://linkedin.com/company/adwola", icon: Linkedin },
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/adwola",
+    icon: Linkedin,
+  },
   { name: "Facebook", href: "https://facebook.com/adwola", icon: Facebook },
   { name: "Instagram", href: "https://instagram.com/adwola", icon: Instagram },
   { name: "GitHub", href: "https://github.com/adwola", icon: Github },
@@ -59,11 +66,14 @@ const socialLinks = [
 ];
 
 interface AdwolaFooterProps {
-  variant?: 'full' | 'minimal';
+  variant?: "full" | "minimal";
   showNewsletter?: boolean;
 }
 
-export function AdwolaFooter({ variant = 'full', showNewsletter = true }: AdwolaFooterProps) {
+export function AdwolaFooter({
+  variant = "full",
+  showNewsletter = true,
+}: AdwolaFooterProps) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -123,7 +133,7 @@ export function AdwolaFooter({ variant = 'full', showNewsletter = true }: Adwola
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Newsletter Section */}
-        {showNewsletter && variant === 'full' && (
+        {showNewsletter && variant === "full" && (
           <ScrollReveal direction="up">
             <div className="py-16 border-b border-white/10">
               <div className="max-w-4xl mx-auto text-center">
@@ -177,7 +187,7 @@ export function AdwolaFooter({ variant = 'full', showNewsletter = true }: Adwola
         )}
 
         {/* Main Footer Content */}
-        <div className={variant === 'full' ? "py-16" : "py-12"}>
+        <div className={variant === "full" ? "py-16" : "py-12"}>
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-12">
             {/* Brand Section */}
             <div className="lg:col-span-2">
@@ -192,11 +202,14 @@ export function AdwolaFooter({ variant = 'full', showNewsletter = true }: Adwola
                   >
                     <Sparkles className="w-7 h-7 text-white" />
                   </motion.div>
-                  <span className="text-2xl font-bold">{adwolaDesignSystem.brand.name}</span>
+                  <span className="text-2xl font-bold">
+                    {adwolaDesignSystem.brand.name}
+                  </span>
                 </Link>
 
                 <p className="text-blue-50 text-lg leading-relaxed mb-6">
-                  {adwolaMessaging.keyMessages.quality}. {adwolaMessaging.keyMessages.speed}.
+                  {adwolaMessaging.keyMessages.quality}.{" "}
+                  {adwolaMessaging.keyMessages.speed}.
                 </p>
 
                 <div className="space-y-3 text-blue-50">
@@ -246,7 +259,9 @@ export function AdwolaFooter({ variant = 'full', showNewsletter = true }: Adwola
           <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <ScrollReveal direction="right">
               <div className="text-blue-50 text-center md:text-left">
-                <p className="mb-1">© 2025 {adwolaDesignSystem.brand.name}. All rights reserved.</p>
+                <p className="mb-1">
+                  © 2025 {adwolaDesignSystem.brand.name}. All rights reserved.
+                </p>
                 <p className="text-sm">
                   Built with ❤️ by{" "}
                   <Link
@@ -290,13 +305,13 @@ export function AdwolaFooter({ variant = 'full', showNewsletter = true }: Adwola
           </div>
 
           {/* Additional Legal Info */}
-          {variant === 'full' && (
+          {variant === "full" && (
             <ScrollReveal direction="up" delay={0.4}>
               <div className="mt-8 pt-6 border-t border-white/5">
                 <div className="text-center text-sm text-blue-200/70 space-y-2">
                   <p>
-                    {adwolaDesignSystem.brand.name} is GDPR compliant and SOC 2 certified. We take your
-                    privacy seriously.
+                    {adwolaDesignSystem.brand.name} is GDPR compliant and SOC 2
+                    certified. We take your privacy seriously.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4 text-xs">
                     <Link
