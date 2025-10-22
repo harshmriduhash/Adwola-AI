@@ -1,19 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Rocket, Phone, Shield, Clock, Zap, CheckCircle, Star } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import {
+  Rocket,
+  Phone,
+  Shield,
+  Clock,
+  Zap,
+  CheckCircle,
+  Star,
+} from "lucide-react";
 
 export default function EnhancedFinalCTA() {
   const [timeLeft, setTimeLeft] = useState({
     days: 5,
     hours: 14,
     minutes: 32,
-    seconds: 45
+    seconds: 45,
   });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         let newSeconds = prev.seconds - 1;
         let newMinutes = prev.minutes;
         let newHours = prev.hours;
@@ -36,7 +44,7 @@ export default function EnhancedFinalCTA() {
           days: newDays,
           hours: newHours,
           minutes: newMinutes,
-          seconds: newSeconds
+          seconds: newSeconds,
         };
       });
     }, 1000);
@@ -47,20 +55,20 @@ export default function EnhancedFinalCTA() {
   const features = [
     { text: "50% OFF", highlight: true },
     { text: "14 Days Free", highlight: false },
-    { text: "∞ Content", highlight: false }
+    { text: "∞ Content", highlight: false },
   ];
 
   const trustIndicators = [
     { icon: Shield, text: "No credit card required" },
     { icon: Clock, text: "Cancel anytime" },
-    { icon: Zap, text: "Setup in 60 seconds" }
+    { icon: Zap, text: "Setup in 60 seconds" },
   ];
 
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900"></div>
-      
+
       {/* Radial Gradients for Depth */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
@@ -84,27 +92,32 @@ export default function EnhancedFinalCTA() {
               </span>
             </h2>
             <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Join thousands of creators who&apos;ve transformed their content strategy with AI-powered tools
+              Join thousands of creators who&apos;ve transformed their content
+              strategy with AI-powered tools
             </p>
           </div>
 
           {/* Countdown Timer */}
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 max-w-2xl mx-auto">
-            <h3 className="text-white text-xl font-semibold mb-6">Offer expires in:</h3>
+            <h3 className="text-white text-xl font-semibold mb-6">
+              Offer expires in:
+            </h3>
             <div className="grid grid-cols-4 gap-4">
               {[
-                { label: 'Days', value: timeLeft.days },
-                { label: 'Hours', value: timeLeft.hours },
-                { label: 'Minutes', value: timeLeft.minutes },
-                { label: 'Seconds', value: timeLeft.seconds }
+                { label: "Days", value: timeLeft.days },
+                { label: "Hours", value: timeLeft.hours },
+                { label: "Minutes", value: timeLeft.minutes },
+                { label: "Seconds", value: timeLeft.seconds },
               ].map((item, index) => (
                 <div key={index} className="text-center">
                   <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl p-4 shadow-lg mb-2">
                     <span className="text-3xl font-bold text-white">
-                      {item.value.toString().padStart(2, '0')}
+                      {item.value.toString().padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-gray-300 text-sm font-medium">{item.label}</span>
+                  <span className="text-gray-300 text-sm font-medium">
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -117,14 +130,16 @@ export default function EnhancedFinalCTA() {
                 <div
                   key={index}
                   className={`text-center p-4 rounded-xl ${
-                    feature.highlight 
-                      ? 'bg-gradient-to-br from-orange-500 to-red-500 shadow-lg scale-110' 
-                      : 'bg-white/10'
+                    feature.highlight
+                      ? "bg-gradient-to-br from-orange-500 to-red-500 shadow-lg scale-110"
+                      : "bg-white/10"
                   }`}
                 >
-                  <div className={`text-2xl font-bold ${
-                    feature.highlight ? 'text-white' : 'text-blue-300'
-                  }`}>
+                  <div
+                    className={`text-2xl font-bold ${
+                      feature.highlight ? "text-white" : "text-blue-300"
+                    }`}
+                  >
                     {feature.text}
                   </div>
                 </div>
@@ -140,7 +155,7 @@ export default function EnhancedFinalCTA() {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             </button>
-            
+
             <button className="flex items-center space-x-3 px-12 py-6 border-2 border-white/30 text-white font-semibold text-xl rounded-2xl hover:border-white/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
               <Phone className="w-6 h-6" />
               <span>Book a Demo Call</span>
@@ -179,11 +194,14 @@ export default function EnhancedFinalCTA() {
           <div className="bg-gradient-to-r from-green-900/50 to-blue-900/50 backdrop-blur-lg rounded-2xl p-8 border border-green-500/30 max-w-4xl mx-auto">
             <div className="flex items-center justify-center space-x-3 mb-4">
               <CheckCircle className="w-8 h-8 text-green-400" />
-              <h3 className="text-2xl font-bold text-white">Risk-Free Guarantee</h3>
+              <h3 className="text-2xl font-bold text-white">
+                Risk-Free Guarantee
+              </h3>
             </div>
             <p className="text-gray-300 text-lg leading-relaxed">
-              Try Adwola for 14 days absolutely free. If you&apos;re not completely satisfied with the results, 
-              we&apos;ll refund every penny. No questions asked. Your success is our priority.
+              Try Adwola for 14 days absolutely free. If you&apos;re not
+              completely satisfied with the results, we&apos;ll refund every
+              penny. No questions asked. Your success is our priority.
             </p>
           </div>
         </div>
@@ -196,12 +214,17 @@ export default function EnhancedFinalCTA() {
         .animation-delay-4000 {
           animation-delay: 4s;
         }
-        
+
         @keyframes pulse {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 0.4; }
+          0%,
+          100% {
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.4;
+          }
         }
-        
+
         @media (prefers-reduced-motion: reduce) {
           .animate-pulse,
           .animate-bounce,
