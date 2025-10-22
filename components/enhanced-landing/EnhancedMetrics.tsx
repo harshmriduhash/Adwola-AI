@@ -1,7 +1,7 @@
 "use client";
 
-import React from 'react';
-import { TrendingUp, Zap, Clock, DollarSign } from 'lucide-react';
+import React from "react";
+import { TrendingUp, Zap, Clock, DollarSign } from "lucide-react";
 
 export default function EnhancedMetrics() {
   const metrics = [
@@ -11,7 +11,7 @@ export default function EnhancedMetrics() {
       change: "+47%",
       icon: TrendingUp,
       gradient: "from-blue-500 to-cyan-500",
-      description: "Higher engagement across all platforms"
+      description: "Higher engagement across all platforms",
     },
     {
       title: "Content Creation Speed",
@@ -19,7 +19,7 @@ export default function EnhancedMetrics() {
       change: "+1,400%",
       icon: Zap,
       gradient: "from-purple-500 to-pink-500",
-      description: "Faster than traditional methods"
+      description: "Faster than traditional methods",
     },
     {
       title: "Time Saved Weekly",
@@ -27,7 +27,7 @@ export default function EnhancedMetrics() {
       change: "+89%",
       icon: Clock,
       gradient: "from-green-500 to-emerald-500",
-      description: "More time for strategic planning"
+      description: "More time for strategic planning",
     },
     {
       title: "ROI Improvement",
@@ -35,8 +35,8 @@ export default function EnhancedMetrics() {
       change: "+156%",
       icon: DollarSign,
       gradient: "from-orange-500 to-red-500",
-      description: "Better return on marketing investment"
-    }
+      description: "Better return on marketing investment",
+    },
   ];
 
   return (
@@ -47,7 +47,8 @@ export default function EnhancedMetrics() {
             Results That Speak for Themselves
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Join thousands of creators who&apos;ve transformed their content strategy with AI-powered tools
+            Join thousands of creators who&apos;ve transformed their content
+            strategy with AI-powered tools
           </p>
         </div>
 
@@ -59,15 +60,21 @@ export default function EnhancedMetrics() {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Background Gradient Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${metric.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-              
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${metric.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+              ></div>
+
               {/* Icon with gradient background */}
               <div className="relative mb-6">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${metric.gradient} p-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                <div
+                  className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${metric.gradient} p-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                >
                   <metric.icon className="w-full h-full text-white" />
                 </div>
                 {/* Animated glow effect */}
-                <div className={`absolute inset-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${metric.gradient} opacity-50 blur-lg group-hover:blur-xl transition-all duration-300`}></div>
+                <div
+                  className={`absolute inset-0 w-16 h-16 rounded-2xl bg-gradient-to-br ${metric.gradient} opacity-50 blur-lg group-hover:blur-xl transition-all duration-300`}
+                ></div>
               </div>
 
               {/* Content */}
@@ -75,9 +82,11 @@ export default function EnhancedMetrics() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-gray-800 transition-colors duration-300">
                   {metric.title}
                 </h3>
-                
+
                 <div className="flex items-baseline space-x-2 mb-2">
-                  <span className={`text-4xl font-bold bg-gradient-to-r ${metric.gradient} bg-clip-text text-transparent`}>
+                  <span
+                    className={`text-4xl font-bold bg-gradient-to-r ${metric.gradient} bg-clip-text text-transparent`}
+                  >
                     {metric.value}
                   </span>
                   <span className="text-green-600 font-semibold text-sm flex items-center">
@@ -85,7 +94,7 @@ export default function EnhancedMetrics() {
                     {metric.change}
                   </span>
                 </div>
-                
+
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {metric.description}
                 </p>
@@ -93,9 +102,11 @@ export default function EnhancedMetrics() {
 
               {/* Hover animation elements */}
               <div className="absolute top-0 right-0 w-32 h-32 transform translate-x-16 -translate-y-16 group-hover:translate-x-12 group-hover:-translate-y-12 transition-transform duration-500">
-                <div className={`w-full h-full rounded-full bg-gradient-to-br ${metric.gradient} opacity-10 blur-xl`}></div>
+                <div
+                  className={`w-full h-full rounded-full bg-gradient-to-br ${metric.gradient} opacity-10 blur-xl`}
+                ></div>
               </div>
-              
+
               {/* Bottom shine effect */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
@@ -132,13 +143,13 @@ export default function EnhancedMetrics() {
             transform: translateY(0);
           }
         }
-        
+
         .group {
           animation: slideUp 0.6s ease-out forwards;
           opacity: 0;
           animation-fill-mode: both;
         }
-        
+
         @media (prefers-reduced-motion: reduce) {
           .group {
             animation: none;
